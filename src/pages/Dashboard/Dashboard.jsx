@@ -91,6 +91,7 @@ const Dashboard = () => {
     if (name === "invoiceDate" && isValidDateString(value)) {
       const startYear = getFinancialYear(new Date(value));
       const currentInvoiceNumber = editInvoice.invoiceNumber.substring(4);
+      console.log(`Current Invoice Number is ${currentInvoiceNumber} and Complete Invoice Number is ${editInvoice.invoiceNumber}`)
       setEditInvoice((prevState) => ({
         ...prevState,
         [name]: value,
