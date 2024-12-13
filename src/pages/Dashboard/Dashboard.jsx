@@ -252,7 +252,7 @@ const Dashboard = () => {
                         <input
                           type="number"
                           name="invoiceNumber"
-                          value={editInvoice?.invoiceNumber?.substring(4)}
+                          value={editInvoice.invoiceNumber.substring(4)}
                           onChange={handleEditChange}
                         />
                       </label>
@@ -261,7 +261,7 @@ const Dashboard = () => {
                         <input
                           type="date"
                           name="invoiceDate"
-                          value={editInvoice?.invoiceDate?.split("T")[0]}
+                          value={editInvoice.invoiceDate.split("T")[0]}
                           onChange={handleEditChange}
                         />
                       </label>
