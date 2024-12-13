@@ -30,13 +30,13 @@ const LoginPage = () => {
         {error && <p className="error-message">{error}</p>}
         <input
           type="text"
-          placeholder="Username"
+          placeholder="Username: admin"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
         <input
           type="password"
-          placeholder="Password"
+          placeholder="Password: adminpassword"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
