@@ -1,20 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../actions/authActions";
-import { selectUserError } from "../../reducers/adminSlice";
+import { selectUserError, selectUserLoading } from "../../reducers/adminSlice";
 import "./LoginPage.css";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
-
-
 
 const LoginPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const error = useSelector(selectUserError);
+  const loading = useSelector(selectUserLoading);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [dots, setDots] = useState("");
+
+  // Animating dots during loading
+  useEffect(() => {
+    if (loading) {
+      const interval = setInterval(() => {
+        setDots((prevDots) => (prevDots.length < 3 ? prevDots + "." : ""));
+      }, 500); // Update dots every 500ms
+      return () => clearInterval(interval);
+    }
+    setDots(""); // Reset dots when not loading
+  }, [loading]);
 
   const handleLogin = () => {
     const clientTime = new Date().toISOString();
@@ -40,7 +51,9 @@ const LoginPage = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button onClick={handleLogin}>Sign In</button>
+        <button onClick={handleLogin} disabled={loading}>
+          {loading ? `Wait a minute${dots}` : "Sign In"}
+        </button>
       </div>
       <Footer />
     </div>

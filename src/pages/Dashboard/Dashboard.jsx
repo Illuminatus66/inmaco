@@ -46,6 +46,10 @@ const Dashboard = () => {
   ];
 
   const getFinancialYear = (date) => {
+    const validDate = typeof date === "string" ? new Date(date) : date;
+    if (isNaN(validDate)) {
+      throw new Error("Invalid date provided to getFinancialYear");
+    }
     const year = date.getFullYear();
     const month = date.getMonth();
     const startYear = month >= 3 ? year : year - 1;
@@ -241,11 +245,11 @@ const Dashboard = () => {
             {!loading && !error && invoicesToDisplay.length === 0 && (
               <p>No invoices to display</p>
             )}
-            {!loading && !error && invoicesToDisplay?.length > 0 && 
+            {!loading && !error && invoicesToDisplay.length > 0 && 
               invoicesToDisplay.map((invoice) => (
-                <div key={invoice?.invoiceNumber} className="invoice-item">
+                <div key={invoice._id} className="invoice-item">
                   {editInvoice &&
-                  editInvoice.invoiceNumber === invoice.invoiceNumber ? (
+                  editInvoice._id === invoice._id ? (
                     <>
                       <label>
                         Invoice No:

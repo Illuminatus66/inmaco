@@ -46,6 +46,10 @@
 
 .search-section input {
   flex: 1;
+  padding: 0.5rem;
+  border: 1px solid black;
+  border-radius: 4px;
+  font-size: 1rem;
 }
 
 .search-section button {
@@ -58,6 +62,10 @@
 
 .financial-year-section {
   margin-bottom: 1rem;
+  align-items: center;
+  gap: 0.5rem;
+  justify-content: center; /* Centers the items */
+  margin-bottom: 0.5rem;
 }
 
 .financial-year-section h4 {
@@ -72,6 +80,11 @@
 }
 
 .financial-year-section input[type="radio"] {
+  cursor: pointer;
+}
+.financial-year-section label {
+  margin: 0;
+  font-size: 1rem;
   cursor: pointer;
 }
 
