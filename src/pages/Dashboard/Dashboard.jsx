@@ -109,10 +109,11 @@ const Dashboard = () => {
     });
   };
   const handleSave = () => {
+    console.log("handleSave action triggered")
     const originalInvoice = invoices.find(
       (inv) => inv._id === editInvoice._id
     );
-
+    console.log("Original Invoice:", originalInvoice)
     if (originalInvoice) {
       const originalInvoiceNumber = originalInvoice.invoiceNumber;
       dispatch(updateinvoice(originalInvoiceNumber, editInvoice));
