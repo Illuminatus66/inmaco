@@ -26,9 +26,9 @@ export const createinvoice = createAsyncThunk(
   async (invoiceData, { rejectWithValue }) => {
     try {
       console.log("Creating invoice", invoiceData);
-      await createInvoice(invoiceData);
+      const response = await createInvoice(invoiceData);
       console.log("Invoice created", invoiceData);
-      return { invoiceData };
+      return response.data;
     } catch (error) {
       const errorMessage =
         error.response?.data?.message || "Failed to create invoice";
