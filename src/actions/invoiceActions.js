@@ -27,7 +27,7 @@ export const createinvoice = createAsyncThunk(
     try {
       console.log("Creating invoice", invoiceData);
       const response = await createInvoice(invoiceData);
-      console.log("Invoice created", invoiceData);
+      console.log("Invoice created", response.data);
       return response.data;
     } catch (error) {
       const errorMessage =
