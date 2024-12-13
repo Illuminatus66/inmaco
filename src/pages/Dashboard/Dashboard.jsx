@@ -47,7 +47,7 @@ const Dashboard = () => {
 
   const getFinancialYear = (date) => {
     const validDate = typeof date === "string" ? new Date(date) : date;
-    console.log("The date looks like this:", validDate)
+    console.log("The date looks like this:", validDate);
     if (isNaN(validDate)) {
       throw new Error("Invalid date provided to getFinancialYear");
     }
@@ -78,6 +78,29 @@ const Dashboard = () => {
     setEditInvoice({ ...invoice });
   };
 
+  const isValidDateString = (dateString) => {
+    // Simple regex to check if the date string is in YYYY-MM-DD format
+    const regex = /^\d{4}-\d{2}-\d{2}$/;
+    return regex.test(dateString);
+  };
+
+  const handleDateEditChange = (e) => {
+    const { name, value } = e.target;
+
+    // Only update if the value is a valid date string
+    if (name === "invoiceDate" && isValidDateString(value)) {
+      const startYear = getFinancialYear(new Date(value));
+      const currentInvoiceNumber = editInvoice.invoiceNumber.substring(4);
+      setEditInvoice((prevState) => ({
+        ...prevState,
+        [name]: value,
+        invoiceNumber: `${startYear}${currentInvoiceNumber}`,
+      }));
+    } else {
+      console.log("Invalid date input, waiting for a valid date string.");
+    }
+  };
+
   const handleEditChange = (e) => {
     const { name, value } = e.target;
 
@@ -88,17 +111,6 @@ const Dashboard = () => {
         return {
           ...prevState,
           [name]: `${startYear}${value}`,
-        };
-      }
-
-      // Updating the date and adjusting the invoice number prefix accordigly, if date changes
-      if (name === "invoiceDate") {
-        const startYear = getFinancialYear(new Date(value));
-        const currentInvoiceNumber = prevState.invoiceNumber.substring(4); // Remove the current prefix
-        return {
-          ...prevState,
-          [name]: value,
-          invoiceNumber: `${startYear}${currentInvoiceNumber}`,
         };
       }
 
@@ -278,7 +290,7 @@ const Dashboard = () => {
                           type="date"
                           name="invoiceDate"
                           value={editInvoice.invoiceDate.split("T")[0]}
-                          onChange={handleEditChange}
+                          onChange={handleDateEditChange}
                         />
                       </label>
                       <label>
