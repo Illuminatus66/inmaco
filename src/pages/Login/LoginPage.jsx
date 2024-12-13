@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../actions/authActions";
 import { selectUserError } from "../../reducers/adminSlice";
 import "./LoginPage.css";
-import Header from "./Header";
-import Footer from "./Footer";
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
 
 
 
