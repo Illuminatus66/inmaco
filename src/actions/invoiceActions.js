@@ -57,12 +57,13 @@ export const deleteinvoice = createAsyncThunk(
 
 export const updateinvoice = createAsyncThunk(
   "invoice/updateinvoice",
-  async (originalInvoiceNumber, editedInvoice, { rejectWithValue }) => {
+  async (originalInvoiceNumberWithEditedInvoice, { rejectWithValue }) => {
     try {
-      console.log(`Updating invoice ${originalInvoiceNumber} to:`, editedInvoice);
-      await updateInvoice(originalInvoiceNumber, editedInvoice);
-      console.log(`Updated invoice ${originalInvoiceNumber} to:`, editedInvoice);
-      return { originalInvoiceNumber, editedInvoice };
+      const {originalInvoiceNumber, editInvoice} = originalInvoiceNumberWithEditedInvoice
+      console.log(`Updating invoice ${originalInvoiceNumber} to:`, editInvoice);
+      await updateInvoice(originalInvoiceNumber, editInvoice);
+      console.log(`Updated invoice ${originalInvoiceNumber} to:`, editInvoice);
+      return { originalInvoiceNumber, editInvoice };
     } catch (error) {
       const errorMessage =
         error.response?.data?.message || "Failed to update invoice";

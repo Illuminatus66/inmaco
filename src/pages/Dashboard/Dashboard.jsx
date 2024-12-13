@@ -115,8 +115,10 @@ const Dashboard = () => {
     );
     console.log("Original Invoice:", originalInvoice)
     if (originalInvoice) {
+      console.log ("Original Invoice number:", originalInvoice.invoiceNumber);
       const originalInvoiceNumber = originalInvoice.invoiceNumber;
-      dispatch(updateinvoice(originalInvoiceNumber, editInvoice));
+      dispatch(updateinvoice({originalInvoiceNumber, editInvoice}));
+      console.log ("Dispatched async thunk action")
     }
     setEditInvoice(null);
   };
@@ -233,8 +235,8 @@ const Dashboard = () => {
               Clear Date Filters
             </button>
           </div>
-          <button onClick={handleFilter}>Apply Filters</button>
-          <button onClick={clearFilters}>Clear All</button>
+          <button onClick={handleFilter} className="apply-filters">Apply Filters</button>
+          <button onClick={clearFilters}className="clear-all">Clear All</button>
         </div>
 
         {/* Invoices Section */}
