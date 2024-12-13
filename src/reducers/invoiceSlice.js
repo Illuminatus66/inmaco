@@ -88,21 +88,13 @@ const invoiceSlice = createSlice({
         state.error = null;
       })
       .addCase(updateinvoice.fulfilled, (state, action) => {
-        // Update in `invoices`
         const index = state.invoices.findIndex(
           (invoice) => invoice.invoiceNumber === action.payload.originalInvoiceNumber
         );
         if (index !== -1) {
-          state.invoices[index] = action.payload.editedInvoice;
+          state.invoices[index] = action.payload.editInvoice;
         }
-
-        // Update in `filteredInvoices`
-        const filteredIndex = state.filteredInvoices.findIndex(
-          (invoice) => invoice.invoiceNumber === action.payload.originalInvoiceNumber
-        );
-        if (filteredIndex !== -1) {
-          state.filteredInvoices[filteredIndex] = action.payload.editedInvoice;
-        }
+        state.filteredInvoices= [];
         state.loading = false;
         state.error = null;
       })
