@@ -46,6 +46,13 @@ const Dashboard = () => {
     ...new Set(invoices.map((invoice) => invoice.financialYear)),
   ];
 
+  const getFinancialYear = (date) => {
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const startYear = month >= 3 ? year : year - 1;
+    return startYear;
+  };
+
   useEffect(() => {
     if (error) {
       const timer = setTimeout(() => {
@@ -73,21 +80,21 @@ const Dashboard = () => {
     setEditInvoice((prevState) => {
       // Prepending the year from the selected date to the invoice number
       if (name === "invoiceNumber") {
-        const year = new Date(prevState.invoiceDate).getFullYear();
+        const startYear = getFinancialYear(new Date(prevState.invoiceDate));
         return {
           ...prevState,
-          [name]: `${year}${value}`,
+          [name]: `${startYear}${value}`,
         };
       }
 
       // Updating the date and adjusting the invoice number prefix accordigly, if date changes
       if (name === "invoiceDate") {
-        const newYear = new Date(value).getFullYear();
+        const startYear = getFinancialYear(value)
         const currentInvoiceNumber = prevState.invoiceNumber.substring(4); // Remove the current prefix
         return {
           ...prevState,
           [name]: value,
-          invoiceNumber: `${newYear}${currentInvoiceNumber}`,
+          invoiceNumber: `${startYear}${currentInvoiceNumber}`,
         };
       }
 
