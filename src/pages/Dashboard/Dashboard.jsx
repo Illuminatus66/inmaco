@@ -41,9 +41,9 @@ const Dashboard = () => {
   });
   const [searchTerm, setSearchTerm] = useState("");
 
-  const financialYears = [
-    ...new Set(invoices.map((invoice) => invoice.financialYear)),
-  ];
+  const financialYears = invoices.length
+    ? [...new Set(invoices.map((invoice) => invoice.financialYear))]
+    : [];
 
   const getFinancialYear = (date) => {
     const validDate = typeof date === "string" ? new Date(date) : date;
@@ -64,12 +64,12 @@ const Dashboard = () => {
       return () => clearTimeout(timer); // Clear timer on unmount or error change
     }
     if (user) {
-      dispatch(fetchinvoices())
+      dispatch(fetchinvoices());
     }
   }, [user, error, dispatch]);
 
   const handleInvoiceCreation = (newInvoice) => {
-    dispatch(createinvoice(newInvoice))
+    dispatch(createinvoice(newInvoice));
     console.log("New Invoice Created:", newInvoice);
   };
 
@@ -92,7 +92,7 @@ const Dashboard = () => {
 
       // Updating the date and adjusting the invoice number prefix accordigly, if date changes
       if (name === "invoiceDate") {
-        const startYear = getFinancialYear(value)
+        const startYear = getFinancialYear(value);
         const currentInvoiceNumber = prevState.invoiceNumber.substring(4); // Remove the current prefix
         return {
           ...prevState,
@@ -109,16 +109,14 @@ const Dashboard = () => {
     });
   };
   const handleSave = () => {
-    console.log("handleSave action triggered")
-    const originalInvoice = invoices.find(
-      (inv) => inv._id === editInvoice._id
-    );
-    console.log("Original Invoice:", originalInvoice)
+    console.log("handleSave action triggered");
+    const originalInvoice = invoices.find((inv) => inv._id === editInvoice._id);
+    console.log("Original Invoice:", originalInvoice);
     if (originalInvoice) {
-      console.log ("Original Invoice number:", originalInvoice.invoiceNumber);
+      console.log("Original Invoice number:", originalInvoice.invoiceNumber);
       const originalInvoiceNumber = originalInvoice.invoiceNumber;
-      dispatch(updateinvoice({originalInvoiceNumber, editInvoice}));
-      console.log ("Dispatched async thunk action")
+      dispatch(updateinvoice({ originalInvoiceNumber, editInvoice }));
+      console.log("Dispatched async thunk action");
     }
     setEditInvoice(null);
   };
@@ -139,7 +137,7 @@ const Dashboard = () => {
       endDate: "",
     });
     setSearchTerm("");
-    dispatch(clearFilteredInvoices())
+    dispatch(clearFilteredInvoices());
     dispatch(fetchinvoices());
   };
 
@@ -169,24 +167,28 @@ const Dashboard = () => {
           {/* Financial Year Filter */}
           <div className="financial-year-section">
             <h4>Financial Year</h4>
-            {financialYears.map((year) => (
-              <div key={year}>
-                <input
-                  type="radio"
-                  id={year}
-                  name="financialYear"
-                  value={year}
-                  checked={filterCriteria.financialYear === year}
-                  onChange={(e) =>
-                    setFilterCriteria({
-                      ...filterCriteria,
-                      financialYear: e.target.value,
-                    })
-                  }
-                />
-                <label htmlFor={year}>{year}</label>
-              </div>
-            ))}
+            {financialYears.length > 0 ? (
+              financialYears.map((year) => (
+                <div key={year}>
+                  <input
+                    type="radio"
+                    id={year}
+                    name="financialYear"
+                    value={year}
+                    checked={filterCriteria.financialYear === year}
+                    onChange={(e) =>
+                      setFilterCriteria({
+                        ...filterCriteria,
+                        financialYear: e.target.value,
+                      })
+                    }
+                  />
+                  <label htmlFor={year}>{year}</label>
+                </div>
+              ))
+            ) : (
+              <p>No financial years available</p>
+            )}
             <button
               onClick={() =>
                 setFilterCriteria({ ...filterCriteria, financialYear: "" })
@@ -235,13 +237,17 @@ const Dashboard = () => {
               Clear Date Filters
             </button>
           </div>
-          <button onClick={handleFilter} className="apply-filters">Apply Filters</button>
-          <button onClick={clearFilters}className="clear-all">Clear All</button>
+          <button onClick={handleFilter} className="apply-filters">
+            Apply Filters
+          </button>
+          <button onClick={clearFilters} className="clear-all">
+            Clear All
+          </button>
         </div>
 
         {/* Invoices Section */}
         <div className="invoice-section">
-        <CreateInvoice onCreate={handleInvoiceCreation} />
+          <CreateInvoice onCreate={handleInvoiceCreation} />
           <h3>Invoices</h3>
           <div className="invoice-list">
             {loading && <p>Loading...</p>}
@@ -249,11 +255,12 @@ const Dashboard = () => {
             {!loading && !error && invoicesToDisplay.length === 0 && (
               <p>No invoices to display</p>
             )}
-            {!loading && !error && invoicesToDisplay.length > 0 && 
+            {!loading &&
+              !error &&
+              invoicesToDisplay.length > 0 &&
               invoicesToDisplay.map((invoice) => (
                 <div key={invoice._id} className="invoice-item">
-                  {editInvoice &&
-                  editInvoice._id === invoice._id ? (
+                  {editInvoice && editInvoice._id === invoice._id ? (
                     <>
                       <label>
                         Invoice No:
@@ -299,7 +306,11 @@ const Dashboard = () => {
                         <strong>Amount:</strong> {invoice.invoiceAmount}
                       </span>
                       <button onClick={() => handleEdit(invoice)}>✏️</button>
-                      <button onClick={() => handleDelete(invoice.invoiceNumber)}>🗑️</button>
+                      <button
+                        onClick={() => handleDelete(invoice.invoiceNumber)}
+                      >
+                        🗑️
+                      </button>
                     </>
                   )}
                 </div>
