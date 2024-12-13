@@ -167,7 +167,7 @@ const Dashboard = () => {
           {/* Financial Year Filter */}
           <div className="financial-year-section">
             <h4>Financial Year</h4>
-            {financialYears.length > 0 ? (
+            {financialYears?.length > 0 ? (
               financialYears.map((year) => (
                 <div key={year}>
                   <input
@@ -257,8 +257,8 @@ const Dashboard = () => {
             )}
             {!loading &&
               !error &&
-              invoicesToDisplay.length > 0 &&
-              invoicesToDisplay.map((invoice) => (
+              invoicesToDisplay?.length > 0 &&
+              invoicesToDisplay?.map((invoice) => (
                 <div key={invoice._id} className="invoice-item">
                   {editInvoice && editInvoice._id === invoice._id ? (
                     <>
