@@ -47,6 +47,7 @@ const Dashboard = () => {
 
   const getFinancialYear = (date) => {
     const validDate = typeof date === "string" ? new Date(date) : date;
+    console.log("The date looks like this:", validDate)
     if (isNaN(validDate)) {
       throw new Error("Invalid date provided to getFinancialYear");
     }
@@ -92,7 +93,7 @@ const Dashboard = () => {
 
       // Updating the date and adjusting the invoice number prefix accordigly, if date changes
       if (name === "invoiceDate") {
-        const startYear = getFinancialYear(value);
+        const startYear = getFinancialYear(new Date(value));
         const currentInvoiceNumber = prevState.invoiceNumber.substring(4); // Remove the current prefix
         return {
           ...prevState,
