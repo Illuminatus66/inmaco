@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://inmaco_backend(placeholder).com",
+  baseURL: "https://inmaco-backend.onrender.com",
 });
 
 API.interceptors.request.use((req) => {
