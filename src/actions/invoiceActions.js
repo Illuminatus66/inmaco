@@ -78,7 +78,7 @@ export const filterinvoices = createAsyncThunk(
     try {
       console.log("Filtering according to these requirements", filterData);
       const invoices = await filterInvoices(filterData);
-      console.log("Invoices filtered according to these requirements", filterData);
+      console.log("Filtered invoices are:", invoices.data);
       return invoices.data;
     } catch (error) {
       const errorMessage =

@@ -109,11 +109,12 @@ const Dashboard = () => {
     });
   };
   const handleSave = () => {
-    const originalInvoiceNumber = invoices.find(
+    const originalInvoice = invoices.find(
       (inv) => inv._id === editInvoice._id
-    )?.invoiceNumber;
+    );
 
-    if (originalInvoiceNumber) {
+    if (originalInvoice) {
+      const originalInvoiceNumber = originalInvoice.invoiceNumber;
       dispatch(updateinvoice(originalInvoiceNumber, editInvoice));
     }
     setEditInvoice(null);
