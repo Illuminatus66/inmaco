@@ -10,10 +10,9 @@ import {
 } from "../../reducers/invoiceSlice";
 import { selectUserId } from "../../reducers/adminSlice";
 import {
-  fetchInvoices,
-  deleteInvoice,
-  updateInvoice,
-  filterInvoices,
+  deleteinvoice,
+  updateinvoice,
+  filterinvoices,
   fetchinvoices,
   createinvoice,
 } from "../../actions/invoiceActions";
@@ -111,18 +110,18 @@ const Dashboard = () => {
     )?.invoiceNumber;
 
     if (originalInvoiceNumber) {
-      dispatch(updateInvoice(originalInvoiceNumber, editInvoice));
+      dispatch(updateinvoice(originalInvoiceNumber, editInvoice));
     }
     setEditInvoice(null);
   };
 
   const handleDelete = (invoiceNumber) => {
-    dispatch(deleteInvoice(invoiceNumber));
+    dispatch(deleteinvoice(invoiceNumber));
   };
 
   const applySearch = () => {
     setFilterCriteria((prev) => ({ ...prev, invoiceNumber: searchTerm }));
-    dispatch(filterInvoices({ ...filterCriteria, invoiceNumber: searchTerm }));
+    dispatch(filterinvoices({ ...filterCriteria, invoiceNumber: searchTerm }));
   };
 
   const clearFilters = () => {
@@ -133,11 +132,11 @@ const Dashboard = () => {
     });
     setSearchTerm("");
     dispatch(clearFilteredInvoices())
-    dispatch(fetchInvoices());
+    dispatch(fetchinvoices());
   };
 
   const handleFilter = () => {
-    dispatch(filterInvoices(filterCriteria));
+    dispatch(filterinvoices(filterCriteria));
   };
 
   return (
