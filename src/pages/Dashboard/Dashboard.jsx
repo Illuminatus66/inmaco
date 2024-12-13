@@ -20,7 +20,7 @@ import {
 import CreateInvoice from "../../components/CreateInvoice/CreateInvoice";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
-import "./CreateInvoice.css";
+import "../../components/CreateInvoice/CreateInvoice.css";
 import "./Dashboard.css";
 
 const Dashboard = () => {
