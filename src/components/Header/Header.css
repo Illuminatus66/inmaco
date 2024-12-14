@@ -6,6 +6,7 @@
   padding: 10px 20px;
   color: white;
   font-size: 18px;
+  width: auto;
   position: fixed;
   border-bottom: 2px solid #ff0000;
 }
