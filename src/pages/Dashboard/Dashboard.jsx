@@ -173,9 +173,7 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard">
-      <div className="top">
         <Header />
-      </div>
       <div className="main-content">
         <div className="filter-section">
           <p>
