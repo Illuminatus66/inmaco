@@ -58,16 +58,19 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
+    if (user) {
+      dispatch(fetchinvoices());
+    }
+  }, [user, dispatch]);
+
+  useEffect(() => {
     if (error) {
       const timer = setTimeout(() => {
         dispatch(clearInvoiceError());
       }, 3000);
       return () => clearTimeout(timer); // Clear timer on unmount or error change
     }
-    if (user) {
-      dispatch(fetchinvoices());
-    }
-  }, [user, error, dispatch]);
+  }, [error, dispatch]);
 
   const handleInvoiceCreation = (newInvoice) => {
     dispatch(createinvoice(newInvoice));
@@ -91,7 +94,9 @@ const Dashboard = () => {
     if (name === "invoiceDate" && isValidDateString(value)) {
       const startYear = getFinancialYear(new Date(value));
       const currentInvoiceNumber = editInvoice.invoiceNumber.substring(4);
-      console.log(`Current Invoice Number is ${currentInvoiceNumber} and Complete Invoice Number is ${editInvoice.invoiceNumber}`)
+      console.log(
+        `Current Invoice Number is ${currentInvoiceNumber} and Complete Invoice Number is ${editInvoice.invoiceNumber}`
+      );
       setEditInvoice((prevState) => ({
         ...prevState,
         [name]: value,
@@ -139,9 +144,17 @@ const Dashboard = () => {
     dispatch(deleteinvoice(invoiceNumber));
   };
 
+  const handleSearchChange = (e) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+    setFilterCriteria((prev) => ({
+      ...prev,
+      invoiceNumber: value || "", // Clear invoiceNumber when the searchTerm is cleared
+    }));
+  };
+
   const applySearch = () => {
-    setFilterCriteria((prev) => ({ ...prev, invoiceNumber: searchTerm }));
-    dispatch(filterinvoices({ ...filterCriteria, invoiceNumber: searchTerm }));
+    dispatch(filterinvoices({ invoiceNumber: searchTerm }));
   };
 
   const clearFilters = () => {
@@ -152,7 +165,6 @@ const Dashboard = () => {
     });
     setSearchTerm("");
     dispatch(clearFilteredInvoices());
-    dispatch(fetchinvoices());
   };
 
   const handleFilter = () => {
@@ -164,6 +176,13 @@ const Dashboard = () => {
       <Header />
       <div className="main-content">
         <div className="filter-section">
+          <p>
+            The 'Apply Filters' button applies to all of the searching/filtering
+            options, this means that any text present in the search box will be
+            searched for along with any active filters. If you simply want to
+            search for an Invoice Number without having any other active
+            filters, then use the search button instead.
+          </p>
           <h3>Filters</h3>
           {/* Invoice Number Search */}
           <div className="search-section">
@@ -171,7 +190,7 @@ const Dashboard = () => {
               type="number"
               placeholder="Search by Invoice Number"
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+              onChange={handleSearchChange}
             />
             <button onClick={applySearch} title="Search">
               🔍
@@ -181,34 +200,32 @@ const Dashboard = () => {
           {/* Financial Year Filter */}
           <div className="financial-year-section">
             <h4>Financial Year</h4>
-            {financialYears?.length > 0 ? (
-              financialYears.map((year) => (
-                <div key={year}>
-                  <input
-                    type="radio"
-                    id={year}
-                    name="financialYear"
-                    value={year}
-                    checked={filterCriteria.financialYear === year}
-                    onChange={(e) =>
-                      setFilterCriteria({
-                        ...filterCriteria,
-                        financialYear: e.target.value,
-                      })
-                    }
-                  />
-                  <label htmlFor={year}>{year}</label>
-                </div>
-              ))
-            ) : (
-              <p>No financial years available</p>
-            )}
+            <select
+              value={filterCriteria.financialYear}
+              onChange={(e) =>
+                setFilterCriteria({
+                  ...filterCriteria,
+                  financialYear: e.target.value,
+                })
+              }
+            >
+              <option value="">Select Financial Year</option>
+              {financialYears?.length > 0 ? (
+                financialYears.map((year) => (
+                  <option key={year} value={year}>
+                    {year}
+                  </option>
+                ))
+              ) : (
+                <option disabled>No financial years available</option>
+              )}
+            </select>
             <button
               onClick={() =>
                 setFilterCriteria({ ...filterCriteria, financialYear: "" })
               }
             >
-              Clear FY Filter
+              Clear Financial Year Filter
             </button>
           </div>
 
@@ -255,7 +272,7 @@ const Dashboard = () => {
             Apply Filters
           </button>
           <button onClick={clearFilters} className="clear-all">
-            Clear All
+            Clear All Filters
           </button>
         </div>
 

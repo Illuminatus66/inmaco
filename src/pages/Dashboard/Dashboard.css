@@ -64,29 +64,28 @@
 
 .financial-year-section {
   margin-bottom: 1rem;
-  align-items: center;
+  display: flex;
+  flex-direction: column; 
+  align-items: flex-start;
   gap: 0.5rem;
-  margin-bottom: 0.5rem;
 }
 
 .financial-year-section h4 {
   margin-bottom: 0.5rem;
 }
 
-.financial-year-section div {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.5rem;
-  margin-bottom: 0.5rem;
+.financial-year-section select {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #fff;
 }
 
-.financial-year-section input[type="radio"] {
-  cursor: pointer;
-}
-.financial-year-section label {
-  margin: 0;
-  font-size: 1rem;
-  cursor: pointer;
+.financial-year-section select:focus {
+  outline: none;
+  border-color: #007bff;
 }
 
 .financial-year-section button {
@@ -96,6 +95,11 @@
   border-radius: 4px;
   background-color: rgb(253, 132, 132);
   cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.financial-year-section button:hover {
+  background-color: rgb(255, 99, 99);
 }
 
 .date-range-section {
@@ -122,6 +126,10 @@
   border-radius: 4px;
   background-color: rgb(253, 132, 132);
   cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+.date-range-section button:hover {
+  background-color: rgb(255, 99, 99);
 }
 
 .filter-section .clear-all {
@@ -132,6 +140,11 @@
   background-color: rgb(253, 132, 132);
   cursor: pointer;
   width: 100%;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.filter-section .clear-all:hover {
+  background-color: rgb(255, 99, 99);
 }
 
 .filter-section .apply-filters {
@@ -142,6 +155,11 @@
   background-color: rgb(110, 216, 110);
   cursor: pointer;
   width: 100%;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.filter-section .apply-filters:hover {
+  background-color: rgb(83, 173, 83);
 }
 
 .invoice-section {

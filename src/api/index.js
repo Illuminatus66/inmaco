@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://inmaco-backend.onrender.com",
+  baseURL: "https://inmaco-backend.onrender.com/",
 });
 
 API.interceptors.request.use((req) => {
@@ -13,7 +13,7 @@ API.interceptors.request.use((req) => {
 });
 
 export const logIn = (loginData) => 
-  API.post("/api/admin/auth", loginData);
+  API.post("api/admin/auth", loginData);
 
 export const fetchInvoices = () =>
     API.get("api/invoices/all", { withCredentials: true });
