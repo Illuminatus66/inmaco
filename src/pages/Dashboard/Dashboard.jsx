@@ -173,7 +173,7 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard">
-        <Header />
+      <Header />
       <div className="main-content">
         <div className="filter-section">
           <p>
@@ -349,9 +349,7 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      <div className="bottom">
-        <Footer />
-      </div>
+      <Footer />
     </div>
   );
 };
