@@ -18,7 +18,7 @@
   background-color: lightgrey;
   padding: 1rem;
   border-right: 1px solid black;
-  overflow-y: auto;
+  overflow-y: scroll;
 }
 
 .filter-section h3 {
