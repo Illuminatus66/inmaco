@@ -173,7 +173,9 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard">
-      <Header />
+      <div className="header">
+        <Header />
+      </div>
       <div className="main-content">
         <div className="filter-section">
           <p>
@@ -269,7 +271,7 @@ const Dashboard = () => {
             </button>
           </div>
           <button onClick={handleFilter} className="apply-filters">
-            Apply Filters
+            Apply Chosen Filters
           </button>
           <button onClick={clearFilters} className="clear-all">
             Clear All Filters
@@ -303,7 +305,7 @@ const Dashboard = () => {
                         />
                       </label>
                       <label>
-                        Date:
+                        Date(in MM/DD/YYYY):
                         <input
                           type="date"
                           name="invoiceDate"
@@ -312,7 +314,7 @@ const Dashboard = () => {
                         />
                       </label>
                       <label>
-                        Amount:
+                        Amount(in INR):
                         <input
                           type="number"
                           name="invoiceAmount"
@@ -349,7 +351,9 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      <Footer />
+      <div className="footer">
+        <Footer />
+      </div>
     </div>
   );
 };

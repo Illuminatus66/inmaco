@@ -6,9 +6,19 @@
   color: black;
 }
 
+.header {
+  flex-shrink: 0;
+  border-bottom: 2px solid #ff0000;
+}
+
 .main-content {
   display: flex;
   flex: 1;
+}
+
+.footer {
+  flex-shrink: 0;
+  border-top: 1px solid #ff0000;
 }
 
 .filter-section {
@@ -166,10 +176,10 @@
   width: 75%;
   background-color: lightgrey;
   padding: 1rem;
-  overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  overflow-y: auto;
 }
 
 .invoice-section h3 {
