@@ -173,7 +173,7 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard">
-      <div className="header">
+      <div className="top">
         <Header />
       </div>
       <div className="main-content">
@@ -351,7 +351,7 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      <div className="footer">
+      <div className="bottom">
         <Footer />
       </div>
     </div>
