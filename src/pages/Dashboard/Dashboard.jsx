@@ -176,10 +176,10 @@ const Dashboard = () => {
       <Header />
       <div className="main-content">
         <div className="filter-section">
-          <p>
+          <p className="info">
             The 'Apply Filters' button applies to all of the searching/filtering
-            options, this means that any text present in the search box will be
-            searched for along with any active filters. If you simply want to
+            options. This means that any text present in the search box will be
+            searched for along with any active filters. If you want to
             search for an Invoice Number without having any other active
             filters, then use the search button instead.
           </p>
