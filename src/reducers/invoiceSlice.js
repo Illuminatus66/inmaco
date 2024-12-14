@@ -57,6 +57,7 @@ const invoiceSlice = createSlice({
       })
       .addCase(createinvoice.fulfilled, (state, action) => {
         state.invoices.push(action.payload);
+        state.filteredInvoices = []
         state.loading = false;
         state.error = null;
       })
@@ -69,13 +70,10 @@ const invoiceSlice = createSlice({
         state.error = null;
       })
       .addCase(deleteinvoice.fulfilled, (state, action) => {
-        // Remove from both `invoices` and `filteredInvoices`
         state.invoices = state.invoices.filter(
           (invoice) => invoice.invoiceNumber !== action.payload.invoiceNumber
         );
-        state.filteredInvoices = state.filteredInvoices.filter(
-          (invoice) => invoice.invoiceNumber !== action.payload.invoiceNumber
-        );
+        state.filteredInvoices = []
         state.loading = false;
         state.error = null;
       })

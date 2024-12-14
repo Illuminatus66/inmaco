@@ -24,5 +24,5 @@ export const deleteInvoice = (invoiceNumber) =>
 export const updateInvoice = (originalInvoiceNumber, editInvoice) =>
     API.patch(`api/invoices/update/${originalInvoiceNumber}`,editInvoice, { withCredentials: true });
 export const filterInvoices = (filterData) =>
-  API.patch("api/invoices/filter", filterData, { withCredentials: true });
+  API.get("api/invoices/filter", { params: filterData, withCredentials: true });
 
