@@ -27,7 +27,6 @@
   background-color: lightgrey;
   padding: 1rem;
   border-right: 1px solid black;
-  overflow-y: auto;
 }
 
 .filter-section h3 {
