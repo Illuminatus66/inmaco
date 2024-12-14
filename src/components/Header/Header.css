@@ -6,6 +6,8 @@
   padding: 10px 20px;
   color: white;
   font-size: 18px;
+  width: 100%;
+  position: fixed;
 }
 
 .header-left {
@@ -35,6 +37,7 @@
   padding: 5px 10px;
   cursor: pointer;
   font-size: 14px;
+  transition: background-color 0.2s ease-in-out;
 }
 
 .logout-button:hover {
