@@ -74,9 +74,15 @@ Ensure that the following tools are installed on your system:
    npm test
    ```
 
-### Notes
-- Ensure that the backend service is running and accessible at the `REACT_APP_API_BASE_URL` specified in the `.env` file.
-- MongoDB Atlas must be configured to store encrypted admin credentials and invoice data.
+## Screenshots
+### Dashboard
+<img src='./screenshots/Dashboard.png' width='70%' />
+
+### Filtered Invoices
+<img src='./screenshots/FilteredInvoices.png' width='70%' />
+
+### Edit Invoice
+<img src='./screenshots/EditInvoice.png' width='70%' />
 
 ## Contributions
 I welcome contributions to enhance the functionality or fix issues. Please fork the repository, create a branch for your changes, and submit a pull request.
